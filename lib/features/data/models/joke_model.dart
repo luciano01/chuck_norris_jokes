@@ -19,15 +19,27 @@ class JokeModel extends JokeEntity {
           value: value,
         );
 
-  factory JokeModel.fromMap(Map<String, dynamic> map) {
+  Map<String, dynamic> toJson() {
+    return {
+      "categories": categories,
+      "created_at": createdAt,
+      "icon_url": iconUrl,
+      "id": id,
+      "updated_at": updatedAt,
+      "url": url,
+      "value": value,
+    };
+  }
+
+  factory JokeModel.fromJson(Map<String, dynamic> json) {
     return JokeModel(
-      categories: List<String>.from(map['categories'] ?? []),
-      createdAt: map['created_at'] ?? '',
-      iconUrl: map['icon_url'] ?? '',
-      id: map['id'] ?? '',
-      updatedAt: map['updated_at'] ?? '',
-      url: map['url'] ?? '',
-      value: map['value'] ?? '',
+      categories: List<String>.from(json['categories'] ?? []),
+      createdAt: json['created_at'] ?? '',
+      iconUrl: json['icon_url'] ?? '',
+      id: json['id'] ?? '',
+      updatedAt: json['updated_at'] ?? '',
+      url: json['url'] ?? '',
+      value: json['value'] ?? '',
     );
   }
 }
