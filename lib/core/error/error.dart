@@ -1,2 +1,2 @@
 export 'exception.dart';
-export 'failure_interface.dart';
+export 'failure.dart';

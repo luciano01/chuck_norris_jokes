@@ -14,7 +14,16 @@ class JokeRandomRepositoryImpl implements JokeRandomInterface {
   });
 
   @override
-  Future<Either<FailureInterface, JokeEntity>> getJokeRandom() {
-    throw UnimplementedError();
+  Future<Either<Failure, JokeModel>> getJokeRandom() async {
+    if (await networkInfo.hasConnection) {
+      try {
+        final remoteJoke = await jokeRandomRemoteDataSource.getJokeRandom();
+        return Right(remoteJoke);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      return Left(ServerFailure());
+    }
   }
 }

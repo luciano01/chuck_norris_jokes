@@ -8,7 +8,7 @@ class JokeRandomUsecase {
 
   JokeRandomUsecase(this._repository);
 
-  Future<Either<FailureInterface, JokeEntity>> getJokeRandom() async {
+  Future<Either<Failure, JokeEntity>> getJokeRandom() async {
     return await _repository.getJokeRandom();
   }
 }

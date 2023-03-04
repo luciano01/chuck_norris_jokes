@@ -4,5 +4,5 @@ import '../../../core/core.dart';
 import '../domain.dart';
 
 abstract class JokeRandomInterface {
-  Future<Either<FailureInterface, JokeEntity>> getJokeRandom();
+  Future<Either<Failure, JokeEntity>> getJokeRandom();
 }

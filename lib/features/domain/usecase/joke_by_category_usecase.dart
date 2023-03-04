@@ -8,7 +8,7 @@ class JokeByCategoryUsecase {
 
   JokeByCategoryUsecase(this._repository);
 
-  Future<Either<FailureInterface, JokeEntity>> getJokeByCategory(
+  Future<Either<Failure, JokeEntity>> getJokeByCategory(
     String category,
   ) async {
     return await _repository.getJokeByCategory(category);
