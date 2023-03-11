@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
 
+import 'package:chuck_norris_jokes/core/core.dart';
 import 'package:chuck_norris_jokes/features/data/data.dart';
 
 import '../../../fixtures/fixture_reader.dart';
@@ -37,6 +38,21 @@ void main() {
               'Content-Type': 'application/json',
             },
           ));
+    },
+  );
+
+  test(
+    'Should throw a ServerException when the response code is 404 or other',
+    () {
+      when(() => mockHttpClient.get(
+                Uri.parse('https://api.chucknorris.io/jokes/random'),
+                headers: any(named: 'headers'),
+              ))
+          .thenAnswer((_) async => http.Response('Something went wrong', 404));
+
+      final result = dataSourceImpl.getJokeRandom();
+
+      expect(result, throwsA(const TypeMatcher<ServerException>()));
     },
   );
 }
